@@ -1,0 +1,57 @@
+# 🎯 Welcome to the Guess the Number Game!
+print("I'm thinking of a number between 1 and 100...")
+
+# Simple way to generate a pseudo-random number without using any library
+number_seed = int(str(id(object()))[-2:])
+secret_number = (number_seed % 100) + 1
+
+attempts = 0
+
+# Main guessing loop
+while True:
+    guess = input("Enter your guess: ")
+
+    if not guess.isdigit():
+        print("⚠️ Please enter a valid number.")
+        continue
+
+    guess = int(guess)
+    attempts += 1
+
+    if guess == secret_number:
+        print(f"✅ Congratulations! You guessed the number {secret_number} in {attempts} attempts.")
+        break
+    elif guess < secret_number:
+        print("Too low! Try again.")
+    else:
+        print("Too high! Try again.")
+
+# Play again option
+while True:
+    play_again = input("Do you want to play again? (yes/no): ").strip().lower()
+    if play_again in ("yes", "y"):
+        number_seed = int(str(id(object()))[-2:])
+        secret_number = (number_seed % 100) + 1
+        attempts = 0
+        print("New game started! 😎")
+
+        while True:
+            guess = input("Enter your guess: ")
+
+            if not guess.isdigit():
+                print("⚠️ Please enter a valid number.")
+                continue
+
+            guess = int(guess)
+            attempts += 1
+
+            if guess == secret_number:
+                print(f"✅ Congratulations! You guessed the number {secret_number} in {attempts} attempts.")
+                break
+            elif guess < secret_number:
+                print("Too low! Try again.")
+            else:
+                print("Too high! Try again.")
+    else:
+        print("👋 Thanks for playing! Goodbye.")
+        break
